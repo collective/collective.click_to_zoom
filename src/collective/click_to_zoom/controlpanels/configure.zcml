@@ -4,7 +4,5 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.click_to_zoom"
     >
-
   <!-- -*- extra stuff goes here -*- -->
-
 </configure>

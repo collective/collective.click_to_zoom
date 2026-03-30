@@ -2,7 +2,5 @@
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         name="portal_controlpanel"
 >
-
   <!-- -*- extra stuff goes here -*- -->
-
 </object>

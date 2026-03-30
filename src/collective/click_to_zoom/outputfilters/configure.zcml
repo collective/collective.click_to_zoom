@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    >
+
+  <adapter
+      factory=".click_to_zoom.ClickToZoomFilter"
+      provides="plone.outputfilters.interfaces.IFilter"
+      for="*
+           collective.click_to_zoom.interfaces.IBrowserLayer"
+      name="click_to_zoom"
+      />
+
+</configure>

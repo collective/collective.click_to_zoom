@@ -1,0 +1,58 @@
+/* click-to-zoom.css */
+#click-to-zoom-lightbox {
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Transparent before transition */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    cursor: zoom-out;
+}
+
+#click-to-zoom-lightbox.active {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#click-to-zoom-lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+#click-to-zoom-lightbox.active img {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#click-to-zoom-lightbox .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#click-to-zoom-lightbox .close-btn:hover,
+#click-to-zoom-lightbox .close-btn:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Mouse pointer signal directly in the editor */
+a.click-to-zoom {
+    cursor: zoom-in;
+    display: inline-block;
+}

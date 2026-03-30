@@ -20,6 +20,7 @@
   <include package=".indexers" />
   <include package=".vocabularies" />
   <include package=".browser" />
+  <include package=".outputfilters" />
 
   <!-- -*- extra stuff goes here -*- -->
 
