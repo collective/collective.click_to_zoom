@@ -4,6 +4,8 @@ from plone.base.utils import safe_text
 import re
 from bs4 import BeautifulSoup
 from plone import api
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 
 
 @implementer(IFilter)
@@ -45,8 +47,18 @@ class ClickToZoomFilter:
 
         return "<" + tag + "></" + tag + ">"
 
+    def is_enabled(self):
+        registry = getUtility(IRegistry)
+        return registry.get(
+            "collective.click_to_zoom.click_to_zoom_control_panel.enabled",
+            True,
+        )
+
     def __call__(self, data):
         if not data:
+            return data
+
+        if not self.is_enabled():
             return data
 
         data = re.sub(r"<([^<>\s]+?)\s*/>", self._shorttag_replace, data)
@@ -67,12 +79,19 @@ class ClickToZoomFilter:
                 if item is not None:
                     zoom_url = None
 
-                    # Get the cacheable URL for the 'large' (or 'great') scale
+                    # Get the selected image scale from the control panel registry
+                    registry = getUtility(IRegistry)
+                    scale_name = registry.get(
+                        "collective.click_to_zoom.click_to_zoom_control_panel.image_scale",
+                        "large",
+                    )
+
+                    # Get the cacheable URL for the chosen scale
                     try:
                         images_view = api.content.get_view("images", item, self.request)
                         if images_view:
                             # The most common field name for an image is 'image'
-                            scale = images_view.scale("image", scale="large")
+                            scale = images_view.scale("image", scale=scale_name)
                             if scale:
                                 zoom_url = scale.url
                     except Exception:

@@ -9,17 +9,21 @@ from zope.component import adapter
 from zope.interface import Interface
 from zope import schema
 
+
 class IClickToZoomControlPanel(Interface):
-    myfield_name = schema.TextLine(
-        title=_(
-            "This is an example field for this control panel",
-        ),
-        description=_(
-            "",
-        ),
-        default="",
+    enabled = schema.Bool(
+        title=_("Enable Click to Zoom"),
+        description=_("Check this to enable the click-to-zoom effect on images."),
+        default=True,
         required=False,
-        readonly=False,
+    )
+
+    image_scale = schema.Choice(
+        title=_("Image scale"),
+        description=_("Select the image scale that will be loaded when zooming."),
+        vocabulary="plone.app.vocabularies.ImageScales",
+        default="large",
+        required=True,
     )
 
 
@@ -32,7 +36,6 @@ class ClickToZoomControlPanel(RegistryEditForm):
 ClickToZoomControlPanelView = layout.wrap_form(
     ClickToZoomControlPanel, ControlPanelFormWrapper
 )
-
 
 
 @adapter(Interface, IBrowserLayer)

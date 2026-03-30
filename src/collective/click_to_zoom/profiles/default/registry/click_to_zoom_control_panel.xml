@@ -6,7 +6,10 @@
 <!-- -*- extra stuff goes here -*- -->
 
   <records interface="collective.click_to_zoom.controlpanels.click_to_zoom_control_panel.controlpanel.IClickToZoomControlPanel"
-           prefix="collective.click_to_zoom.click_to_zoom_control_panel" />
+           prefix="collective.click_to_zoom.click_to_zoom_control_panel">
+    <value key="enabled">True</value>
+    <value key="image_scale">large</value>
+  </records>
 
 
 </registry>
