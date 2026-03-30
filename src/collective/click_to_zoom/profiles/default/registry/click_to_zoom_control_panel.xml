@@ -1,12 +1,13 @@
-<?xml version="1.0"?>
-<registry
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="collective.click_to_zoom">
+<?xml version="1.0" encoding="utf-8"?>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="collective.click_to_zoom"
+>
 
-<!-- -*- extra stuff goes here -*- -->
+  <!-- -*- extra stuff goes here -*- -->
 
   <records interface="collective.click_to_zoom.controlpanels.click_to_zoom_control_panel.controlpanel.IClickToZoomControlPanel"
-           prefix="collective.click_to_zoom.click_to_zoom_control_panel">
+           prefix="collective.click_to_zoom.click_to_zoom_control_panel"
+  >
     <value key="enabled">True</value>
     <value key="image_scale">large</value>
   </records>

@@ -1,7 +1,3 @@
-import logging
-import re
-import typing
-
 from bs4 import BeautifulSoup
 from plone import api
 from plone.base.utils import safe_text
@@ -9,6 +5,10 @@ from plone.outputfilters.interfaces import IFilter
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.interface import implementer
+
+import logging
+import re
+import typing
 
 
 logger = logging.getLogger(__name__)

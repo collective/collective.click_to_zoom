@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 from collective.click_to_zoom import _
 from collective.click_to_zoom.interfaces import IBrowserLayer
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.restapi.controlpanels import RegistryConfigletPanel
 from plone.z3cform import layout
+from zope import schema
 from zope.component import adapter
 from zope.interface import Interface
-from zope import schema
 
 
 class IClickToZoomControlPanel(Interface):

@@ -6,13 +6,9 @@
     >
   <!-- -*- extra stuff goes here -*- -->
 
-    <include
-        package=".click_to_zoom_control_panel"
-    />
+  <include package=".click_to_zoom_control_panel" />
 
 
-    <include
-        package=".click_to_zoom_control_panel"
-    />
+  <include package=".click_to_zoom_control_panel" />
 
 </configure>

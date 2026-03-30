@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<registry
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="collective.click_to_zoom">
+<?xml version="1.0" encoding="utf-8"?>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+          i18n:domain="collective.click_to_zoom"
+>
 
   <!-- Create a bundle to compile the resources -->
-  <records prefix="plone.bundles/click-to-zoom"
-           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+  <records interface="Products.CMFPlone.interfaces.IBundleRegistry"
+           prefix="plone.bundles/click-to-zoom"
+  >
     <value key="jscompilation">++plone++collective.click_to_zoom/click-to-zoom.js</value>
     <value key="csscompilation">++plone++collective.click_to_zoom/click-to-zoom.css</value>
     <value key="enabled">True</value>
