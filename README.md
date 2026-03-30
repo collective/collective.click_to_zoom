@@ -99,6 +99,10 @@ You can check the list of available subtemplates in the [`bobtemplates.plone` `R
 See also the documentation of [Mockup and Patternslib](https://6.docs.plone.org/classic-ui/mockup.html) for how to build the UI toolkit for Classic UI.
 ```
 
+## Built with AI 🤖
+
+This package was developed in collaboration with Google Gemini. The AI assisted in scaffolding the Plone output filters, writing the Vanilla JS lightbox, and configuring the Zope Component Architecture, which was then reviewed and curated by human developers.
+
 ## License
 
 The project is licensed under GPLv2.
