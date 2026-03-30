@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="collective.click_to_zoom"
+    >
+
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.click_to_zoom: Install"
+      description="Package to configure a new collective.click_to_zoom site"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="collective.click_to_zoom: Uninstall"
+      description="Uninstall collective.click_to_zoom setup."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <!-- Hide Uninstall Profile-->
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="collective.click_to_zoom"
+      />
+
+
+  <include package=".upgrades" />
+
+</configure>
