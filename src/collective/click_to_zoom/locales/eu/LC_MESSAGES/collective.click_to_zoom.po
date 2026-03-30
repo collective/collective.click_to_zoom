@@ -4,48 +4,48 @@ msgstr ""
 "POT-Creation-Date: 2026-03-30 08:07+0000\n"
 "PO-Revision-Date: 2026-03-30 11:00+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: English <LL@li.org>\n"
+"Language-Team: Basque <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: eu\n"
+"Language-Name: Basque\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.click_to_zoom\n"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:15
 msgid "Check this to enable the click-to-zoom effect on images."
-msgstr "Check this to enable the click-to-zoom effect on images."
+msgstr "Aukeratu hau irudietan click-to-zoom (handitzeko) efektua aktibatzeko."
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:32
 msgid "Click To Zoom Control Panel"
-msgstr "Click To Zoom Control Panel"
+msgstr "Click To Zoom kontrol panela"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:14
 msgid "Enable Click to Zoom"
-msgstr "Enable Click to Zoom"
+msgstr "Aktibatu Click to Zoom"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:21
 msgid "Image scale"
-msgstr "Image scale"
+msgstr "Irudi-eskala"
 
 #: collective/click_to_zoom/profiles.zcml:13
 msgid "Package to configure a new collective.click_to_zoom site"
-msgstr "Package to configure a new collective.click_to_zoom site"
+msgstr "collective.click_to_zoom gune berria konfiguratzeko paketea"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:22
 msgid "Select the image scale that will be loaded when zooming."
-msgstr "Select the image scale that will be loaded when zooming."
+msgstr "Hautatu zooma egitean kargatuko den irudi-eskala (tamaina)."
 
 #: collective/click_to_zoom/profiles.zcml:21
 msgid "Uninstall collective.click_to_zoom setup."
-msgstr "Uninstall collective.click_to_zoom setup."
+msgstr "Desinstalatu collective.click_to_zoom-en ezarpenak."
 
 #: collective/click_to_zoom/profiles.zcml:13
 msgid "collective.click_to_zoom: Install"
-msgstr "collective.click_to_zoom: Install"
+msgstr "collective.click_to_zoom: Instalatu"
 
 #: collective/click_to_zoom/profiles.zcml:21
 msgid "collective.click_to_zoom: Uninstall"
-msgstr "collective.click_to_zoom: Uninstall"
+msgstr "collective.click_to_zoom: Desinstalatu"

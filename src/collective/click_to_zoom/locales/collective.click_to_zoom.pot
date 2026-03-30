@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-25 17:12+0000\n"
+"POT-Creation-Date: 2026-03-30 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,3 +16,39 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.click_to_zoom\n"
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:15
+msgid "Check this to enable the click-to-zoom effect on images."
+msgstr ""
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:32
+msgid "Click To Zoom Control Panel"
+msgstr ""
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:14
+msgid "Enable Click to Zoom"
+msgstr ""
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:21
+msgid "Image scale"
+msgstr ""
+
+#: collective/click_to_zoom/profiles.zcml:13
+msgid "Package to configure a new collective.click_to_zoom site"
+msgstr ""
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:22
+msgid "Select the image scale that will be loaded when zooming."
+msgstr ""
+
+#: collective/click_to_zoom/profiles.zcml:21
+msgid "Uninstall collective.click_to_zoom setup."
+msgstr ""
+
+#: collective/click_to_zoom/profiles.zcml:13
+msgid "collective.click_to_zoom: Install"
+msgstr ""
+
+#: collective/click_to_zoom/profiles.zcml:21
+msgid "collective.click_to_zoom: Uninstall"
+msgstr ""

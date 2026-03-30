@@ -4,48 +4,48 @@ msgstr ""
 "POT-Creation-Date: 2026-03-30 08:07+0000\n"
 "PO-Revision-Date: 2026-03-30 11:00+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: English <LL@li.org>\n"
+"Language-Team: Spanish <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.click_to_zoom\n"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:15
 msgid "Check this to enable the click-to-zoom effect on images."
-msgstr "Check this to enable the click-to-zoom effect on images."
+msgstr "Selecciona esto para activar el efecto click-to-zoom (ampliar) en las imágenes."
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:32
 msgid "Click To Zoom Control Panel"
-msgstr "Click To Zoom Control Panel"
+msgstr "Panel de control de Click To Zoom"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:14
 msgid "Enable Click to Zoom"
-msgstr "Enable Click to Zoom"
+msgstr "Activar Click to Zoom"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:21
 msgid "Image scale"
-msgstr "Image scale"
+msgstr "Escala de la imagen"
 
 #: collective/click_to_zoom/profiles.zcml:13
 msgid "Package to configure a new collective.click_to_zoom site"
-msgstr "Package to configure a new collective.click_to_zoom site"
+msgstr "Paquete para configurar un nuevo sitio con collective.click_to_zoom"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:22
 msgid "Select the image scale that will be loaded when zooming."
-msgstr "Select the image scale that will be loaded when zooming."
+msgstr "Selecciona la escala (tamaño) de la imagen que se cargará al hacer zoom."
 
 #: collective/click_to_zoom/profiles.zcml:21
 msgid "Uninstall collective.click_to_zoom setup."
-msgstr "Uninstall collective.click_to_zoom setup."
+msgstr "Desinstalar la configuración de collective.click_to_zoom."
 
 #: collective/click_to_zoom/profiles.zcml:13
 msgid "collective.click_to_zoom: Install"
-msgstr "collective.click_to_zoom: Install"
+msgstr "collective.click_to_zoom: Instalar"
 
 #: collective/click_to_zoom/profiles.zcml:21
 msgid "collective.click_to_zoom: Uninstall"
-msgstr "collective.click_to_zoom: Uninstall"
+msgstr "collective.click_to_zoom: Desinstalar"
