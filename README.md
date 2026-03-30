@@ -1,29 +1,21 @@
-<div align="center">
-    <h1 align="center">collective.click_to_zoom</h1>
-</div>
-<div align="center">
+# collective.click_to_zoom
+
 [![PyPI](https://img.shields.io/pypi/v/collective.click_to_zoom)](https://pypi.org/project/collective.click_to_zoom/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/collective.click_to_zoom)](https://pypi.org/project/collective.click_to_zoom/)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/collective.click_to_zoom)](https://pypi.org/project/collective.click_to_zoom/)
 [![PyPI - License](https://img.shields.io/pypi/l/collective.click_to_zoom)](https://pypi.org/project/collective.click_to_zoom/)
 [![PyPI - Status](https://img.shields.io/pypi/status/collective.click_to_zoom)](https://pypi.org/project/collective.click_to_zoom/)
-
-
 [![PyPI - Plone Versions](https://img.shields.io/pypi/frameworkversions/plone/collective.click_to_zoom)](https://pypi.org/project/collective.click_to_zoom/)
-
 [![CI](https://github.com/collective/collective.click_to_zoom/actions/workflows/main.yml/badge.svg)](https://github.com/collective/collective.click_to_zoom/actions/workflows/main.yml)
 ![Code Style](https://img.shields.io/badge/Code%20Style-Black-000000)
-
 [![GitHub contributors](https://img.shields.io/github/contributors/collective/collective.click_to_zoom)](https://github.com/collective/collective.click_to_zoom)
 [![GitHub Repo stars](https://img.shields.io/github/stars/collective/collective.click_to_zoom?style=social)](https://github.com/collective/collective.click_to_zoom)
 
-</div>
-
-An add-on for Plone to make images inserted through the TinyMCE editor clickable and viable in a bigger resolution
+An add-on for Plone to make images inserted through the TinyMCE editor clickable and viewable in a bigger resolution
 
 ## Features
 
-`collective.click_to_zoom` provides a seamless, click-to-zoom (lightbox) effect for images embedded in Plone RichText fields. 
+`collective.click_to_zoom` provides a seamless, click-to-zoom (lightbox) effect for images embedded in Plone RichText fields.
 
 When a user clicks on an inline image within the page content, the image smoothly expands to the center of the screen with a semi-transparent dark background, mimicking the popular "Medium-style" image zoom functionality.
 
