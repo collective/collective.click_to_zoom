@@ -23,7 +23,18 @@ An add-on for Plone to make images inserted through the TinyMCE editor clickable
 
 ## Features
 
-TODO: List our awesome features
+`collective.click_to_zoom` provides a seamless, click-to-zoom (lightbox) effect for images embedded in Plone RichText fields. 
+
+When a user clicks on an inline image within the page content, the image smoothly expands to the center of the screen with a semi-transparent dark background, mimicking the popular "Medium-style" image zoom functionality.
+
+Key features:
+- **Zero Javascript dependencies:** Uses lightweight Vanilla JS to handle the zoom effect without relying on heavy libraries (no jQuery, no NPM dependencies required).
+- **Non-destructive Output Filter:** Uses a backend Python output filter (`ClickToZoomFilter`) that safely wraps the `<img>` tags in an `<a>` tag pointing to a larger cacheable image scale, ensuring it doesn't break Plone's built-in image `srcset` functionalities.
+- **Configurable:** Includes a Plone Control Panel where administrators can:
+  - Toggle the click-to-zoom effect globally (Enable/Disable).
+  - Select the specific image scale to be used when zooming (e.g., `large`, `great`, `huge`), dynamically populated from Plone's existing image scales vocabulary.
+- **ZCA compliant:** The backend HTML parser is conditionally applied through an `IBrowserLayer`, ensuring zero overhead on sites where the add-on is not installed.
+- **Graceful degradation:** If an image is already manually wrapped in a hyperlink (e.g., the editor linked the image to a different page), the zoom filter will safely ignore it to preserve the author's intent.
 
 ## Installation
 
