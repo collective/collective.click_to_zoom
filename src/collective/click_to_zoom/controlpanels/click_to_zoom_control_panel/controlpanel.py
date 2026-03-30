@@ -21,7 +21,7 @@ class IClickToZoomControlPanel(Interface):
     image_scale = schema.Choice(
         title=_("Image scale"),
         description=_("Select the image scale that will be loaded when zooming."),
-        vocabulary="plone.app.vocabularies.ImageScales",
+        vocabulary="plone.app.vocabularies.ImagesScales",
         default="large",
         required=True,
     )
