@@ -9,6 +9,13 @@
 
 <!-- towncrier release notes start -->
 
+## 1.1.0 (2026-03-30)
+
+
+### New features:
+
+- eu and es translations @erral 
+
 ## 1.0.0 (2026-03-30)
 
 
