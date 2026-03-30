@@ -1,12 +1,7 @@
 {
-  "recommendations": [
-    "charliermarsh.ruff",
-    "ms-python.python",
-    "ExecutableBookProject.myst-highlight",
-    "ms-vscode-remote.remote-containers",
-    "redhat.vscode-yaml",
-    "editorconfig.editorconfig",
-    "github.vscode-github-actions",
-    "plone.plone-vs-utilities"
-  ]
+    "recommendations": [
+        "myml.vscode-markdown-plantuml-preview",
+        "esbenp.prettier-vscode",
+        "jebbs.plantuml"
+    ]
 }
