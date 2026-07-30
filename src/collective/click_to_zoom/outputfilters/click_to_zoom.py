@@ -1,18 +1,27 @@
 from bs4 import BeautifulSoup
 from plone import api
-from plone.base.utils import safe_text
 from plone.outputfilters.interfaces import IFilter
 from plone.registry.interfaces import IRegistry
-try:
-    from plone.rfc822.interfaces import IPrimaryFieldInfo
-except ImportError:
-    IPrimaryFieldInfo = None
 from zope.component import getUtility
 from zope.interface import implementer
 
 import logging
 import re
 import typing
+
+
+try:
+    from plone.rfc822.interfaces import IPrimaryFieldInfo
+except ImportError:
+    IPrimaryFieldInfo = None
+
+
+def safe_text(text, encoding="utf-8"):
+    if isinstance(text, str):
+        return text
+    if isinstance(text, bytes):
+        return text.decode(encoding)
+    return str(text)
 
 
 logger = logging.getLogger(__name__)
