@@ -79,7 +79,11 @@ class ClickToZoomFilter:
         )
 
         try:
-            images_view = api.content.get_view("images", item, self.request)
+            request = self.request
+            if request is None:
+                from zope.globalrequest import getRequest
+                request = getRequest()
+            images_view = api.content.get_view("images", item, request)
             if images_view:
                 scale = images_view.scale(field_name, scale=scale_name)
                 if scale:
@@ -122,7 +126,11 @@ class ClickToZoomFilter:
 
         # Final fallback: use the 'images' view to get original scale dimensions
         try:
-            images_view = api.content.get_view("images", item, self.request)
+            request = self.request
+            if request is None:
+                from zope.globalrequest import getRequest
+                request = getRequest()
+            images_view = api.content.get_view("images", item, request)
             if images_view:
                 scale = images_view.scale("image")
                 if scale:
@@ -176,8 +184,11 @@ class ClickToZoomFilter:
         if not self.is_enabled():
             return data
 
+        # Make sure data is text
+        data = safe_text(data)
+
         data = re.sub(r"<([^<>\s]+?)\s*/>", self._shorttag_replace, data)
-        soup = BeautifulSoup(safe_text(data), "html.parser")
+        soup = BeautifulSoup(data, "html.parser")
         has_changes = False
         registry = getUtility(IRegistry)
 
