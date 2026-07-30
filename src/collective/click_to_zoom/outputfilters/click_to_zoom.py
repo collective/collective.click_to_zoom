@@ -3,6 +3,7 @@ from plone import api
 from plone.base.utils import safe_text
 from plone.outputfilters.interfaces import IFilter
 from plone.registry.interfaces import IRegistry
+from plone.rfc822.interfaces import IPrimaryFieldInfo
 from zope.component import getUtility
 from zope.interface import implementer
 
@@ -60,6 +61,31 @@ class ClickToZoomFilter:
             True,
         )
 
+    def _get_zoom_url(self, item, registry):
+        show_original = registry.get(
+            "collective.click_to_zoom.click_to_zoom_control_panel.show_original",
+            False,
+        )
+
+        if show_original:
+            return f"{item.absolute_url()}/@@images/image"
+
+        scale_name = registry.get(
+            "collective.click_to_zoom.click_to_zoom_control_panel.image_scale",
+            "large",
+        )
+
+        try:
+            images_view = api.content.get_view("images", item, self.request)
+            if images_view:
+                scale = images_view.scale("image", scale=scale_name)
+                if scale:
+                    return scale.url
+        except Exception as e:
+            logger.debug("Failed to obtain scale for click-to-zoom: %s", str(e))
+
+        return item.absolute_url()
+
     def _process_image(self, img, soup, registry):
         # If the image is already inside a link, we don't do anything
         if img.parent and img.parent.name == "a":
@@ -76,42 +102,27 @@ class ClickToZoomFilter:
         if item is None:
             return False
 
-        zoom_url = None
-
-        # Check if we should use the original image
-        show_original = registry.get(
-            "collective.click_to_zoom.click_to_zoom_control_panel.show_original",
-            False,
-        )
-
-        if show_original:
-            zoom_url = f"{item.absolute_url()}/@@images/image"
-        else:
-            # Get the selected image scale from the control panel registry
-            scale_name = registry.get(
-                "collective.click_to_zoom.click_to_zoom_control_panel.image_scale",
-                "large",
-            )
-
-            # Get the cacheable URL for the chosen scale
-            try:
-                images_view = api.content.get_view("images", item, self.request)
-                if images_view:
-                    # The most common field name for an image is 'image'
-                    scale = images_view.scale("image", scale=scale_name)
-                    if scale:
-                        zoom_url = scale.url
-            except Exception as e:
-                logger.debug("Failed to obtain scale for click-to-zoom: %s", str(e))
-
-        # If no scale is obtained, use the original image URL as fallback
-        if not zoom_url:
-            zoom_url = item.absolute_url()
+        zoom_url = self._get_zoom_url(item, registry)
 
         # Create a new <a> tag and wrap the image
         a_tag = soup.new_tag("a", href=zoom_url)
         a_tag["class"] = "click-to-zoom"
         a_tag["data-linktype"] = "image-zoom"
+
+        # Get original dimensions
+        try:
+            info = IPrimaryFieldInfo(item, None)
+            if info:
+                field_value = info.value
+                if field_value and hasattr(field_value, "getImageSize"):
+                    width, height = field_value.getImageSize()
+                    a_tag["data-width"] = width
+                    a_tag["data-height"] = height
+                elif field_value and hasattr(field_value, "width"):
+                    a_tag["data-width"] = field_value.width
+                    a_tag["data-height"] = field_value.height
+        except Exception:
+            logger.debug("Failed to obtain dimensions for click-to-zoom")
 
         img.wrap(a_tag)
         return True

@@ -36,6 +36,8 @@ class TestOutputFilter:
         # It should be a scale URL (contains a hash or a size)
         assert "/@@images/image" in result
         assert 'class="click-to-zoom"' in result
+        assert 'data-width="1"' in result
+        assert 'data-height="1"' in result
 
     def test_filter_show_original_true(self, portal):
         setRoles(portal, TEST_USER_ID, ["Manager"])
@@ -66,3 +68,5 @@ class TestOutputFilter:
 
         assert 'href="http://nohost/plone/test-image-original/@@images/image"' in result
         assert 'class="click-to-zoom"' in result
+        assert 'data-width="1"' in result
+        assert 'data-height="1"' in result

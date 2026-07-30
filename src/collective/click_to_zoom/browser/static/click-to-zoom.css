@@ -32,6 +32,10 @@
     -webkit-user-drag: none;
 }
 
+#click-to-zoom-lightbox.not-zoomable img {
+    cursor: default;
+}
+
 #click-to-zoom-lightbox.active img {
     opacity: 1;
 }

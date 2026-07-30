@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var startY = 0;
     var isDragging = false;
     var dragStarted = false;
+    var maxScale = 1;
+    var originalWidth = 0;
+    var originalHeight = 0;
 
     // Create the Lightbox element and insert it into the DOM
     var lightbox = document.createElement('div');
@@ -35,11 +38,33 @@ document.addEventListener("DOMContentLoaded", function() {
         updateTransform();
         lightbox.classList.remove('zoomed');
         lightbox.classList.remove('active');
+        lightbox.classList.remove('not-zoomable');
         setTimeout(function() {
             if (!lightbox.classList.contains('active')) {
                 lightbox.style.display = 'none';
             }
         }, 300);
+    }
+
+    function calculateMaxScale() {
+        if (originalWidth > 0) {
+            // Wait for image to be rendered to get its actual displayed size at scale 1
+            var displayedWidth = img.offsetWidth;
+            if (displayedWidth > 0) {
+                maxScale = originalWidth / displayedWidth;
+            } else {
+                maxScale = 1;
+            }
+        } else {
+            maxScale = 10; // Fallback if dimensions not provided
+        }
+
+        if (maxScale <= 1.01) { // 1.01 to account for minor rounding
+            lightbox.classList.add('not-zoomable');
+            maxScale = 1;
+        } else {
+            lightbox.classList.remove('not-zoomable');
+        }
     }
 
     // Lightbox close logic
@@ -62,13 +87,15 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        if (maxScale <= 1) return;
+
         if (scale > 1) {
             scale = 1;
             pointX = 0;
             pointY = 0;
             lightbox.classList.remove('zoomed');
         } else {
-            scale = 2.5;
+            scale = maxScale;
             lightbox.classList.add('zoomed');
         }
         updateTransform();
@@ -76,12 +103,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Zoom on wheel
     lightbox.addEventListener('wheel', function(e) {
+        if (maxScale <= 1) return;
+        
         e.preventDefault();
         var delta = -e.deltaY;
         var factor = 0.2;
         var newScale = scale + (delta > 0 ? factor : -factor);
 
-        if (newScale >= 1 && newScale <= 10) {
+        if (newScale >= 1 && newScale <= maxScale) {
             // Zoom towards cursor
             var rect = img.getBoundingClientRect();
             var x = e.clientX - rect.left;
@@ -91,9 +120,10 @@ document.addEventListener("DOMContentLoaded", function() {
             pointY -= (y - rect.height / 2) * (newScale / scale - 1);
             
             scale = newScale;
-            if (scale > 1) {
+            if (scale > 1.01) {
                 lightbox.classList.add('zoomed');
             } else {
+                scale = 1;
                 lightbox.classList.remove('zoomed');
                 pointX = 0;
                 pointY = 0;
@@ -144,6 +174,9 @@ document.addEventListener("DOMContentLoaded", function() {
             e.preventDefault();
             
             var imageSrc = this.getAttribute('href');
+            originalWidth = parseInt(this.getAttribute('data-width') || 0);
+            originalHeight = parseInt(this.getAttribute('data-height') || 0);
+
             if (imageSrc) {
                 img.src = imageSrc;
                 scale = 1;
@@ -151,6 +184,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 pointY = 0;
                 updateTransform();
                 lightbox.style.display = 'flex';
+                
+                // We need to wait for the image to be potentially loaded or at least have dimensions
+                if (img.complete) {
+                    calculateMaxScale();
+                } else {
+                    img.onload = function() {
+                        calculateMaxScale();
+                        img.onload = null;
+                    };
+                }
+
                 setTimeout(function() {
                     lightbox.classList.add('active');
                 }, 10);
