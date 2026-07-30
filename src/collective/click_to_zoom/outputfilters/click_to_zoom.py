@@ -3,7 +3,10 @@ from plone import api
 from plone.base.utils import safe_text
 from plone.outputfilters.interfaces import IFilter
 from plone.registry.interfaces import IRegistry
-from plone.rfc822.interfaces import IPrimaryFieldInfo
+try:
+    from plone.rfc822.interfaces import IPrimaryFieldInfo
+except ImportError:
+    IPrimaryFieldInfo = None
 from zope.component import getUtility
 from zope.interface import implementer
 
@@ -64,9 +67,10 @@ class ClickToZoomFilter:
     def _get_zoom_url(self, item, registry, show_original=False):
         field_name = "image"
         try:
-            info = IPrimaryFieldInfo(item, None)
-            if info:
-                field_name = info.fieldname
+            if IPrimaryFieldInfo is not None:
+                info = IPrimaryFieldInfo(item, None)
+                if info:
+                    field_name = info.fieldname
         except Exception as e:
             logger.debug("Failed to obtain primary field info: %s", str(e))
 
@@ -105,9 +109,10 @@ class ClickToZoomFilter:
 
     def _get_dimensions_from_primary_field(self, item):
         try:
-            info = IPrimaryFieldInfo(item, None)
-            if info:
-                return self._get_dimensions_from_value(info.value)
+            if IPrimaryFieldInfo is not None:
+                info = IPrimaryFieldInfo(item, None)
+                if info:
+                    return self._get_dimensions_from_value(info.value)
         except Exception as e:
             logger.debug("Failed to obtain primary field dimensions: %s", str(e))
         return None, None
