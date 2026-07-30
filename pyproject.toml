@@ -173,7 +173,6 @@ omit = ["src/collective/click_to_zoom/locales/*.py"]
 [tool.zest-releaser]
 python-file-with-version = "src/collective/click_to_zoom/__init__.py"
 
-
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
 
