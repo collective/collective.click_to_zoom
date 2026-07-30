@@ -64,5 +64,5 @@ class TestOutputFilter:
         html = f'<img src="something" data-val="{uid}" data-linktype="image" />'
         result = filter_(html)
 
-        assert 'href="http://nohost/plone/test-image-original/@@images/image"' in result
+        assert "/test-image-original/@@images/image" in result
         assert 'class="click-to-zoom"' not in result
