@@ -4,7 +4,7 @@ dynamic = ["version"]
 description = "An add-on for Plone to make images inserted through the TinyMCE editor clickable and viable in a bigger resolution"
 readme = "README.md"
 license = "GPL-2.0-only"
-requires-python = ">=3.10,<3.14"
+requires-python = ">=3.10"
 authors = [{ name = "CodeSyntax", email = "plone@codesyntax.com" }]
 keywords = ["CMS", "Plone", "Python"]
 classifiers = [
@@ -26,8 +26,6 @@ dependencies = [
     "Products.CMFPlone",
     "beautifulsoup4",
     "plone.api",
-    "plone.namedfile",
-    "plone.rfc822",
     "z3c.jbot",
 ]
 
