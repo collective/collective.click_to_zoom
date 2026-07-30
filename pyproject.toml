@@ -24,7 +24,9 @@ classifiers = [
 ]
 dependencies = [
     "Products.CMFPlone",
+    "beautifulsoup4",
     "plone.api",
+    "plone.namedfile",
     "plone.rfc822",
     "z3c.jbot",
 ]
