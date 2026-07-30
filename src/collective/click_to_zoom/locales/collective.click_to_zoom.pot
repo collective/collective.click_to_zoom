@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-03-30 08:07+0000\n"
+"POT-Creation-Date: 2026-07-30 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,12 +21,16 @@ msgstr ""
 msgid "Check this to enable the click-to-zoom effect on images."
 msgstr ""
 
-#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:32
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:42
 msgid "Click To Zoom Control Panel"
 msgstr ""
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:14
 msgid "Enable Click to Zoom"
+msgstr ""
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:30
+msgid "If enabled, the zoom effect will show the original image instead of the selected scale."
 msgstr ""
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:21
@@ -39,6 +43,10 @@ msgstr ""
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:22
 msgid "Select the image scale that will be loaded when zooming."
+msgstr ""
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:29
+msgid "Show original image"
 msgstr ""
 
 #: collective/click_to_zoom/profiles.zcml:21

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-03-30 08:07+0000\n"
+"POT-Creation-Date: 2026-07-30 13:48+0000\n"
 "PO-Revision-Date: 2026-03-30 11:00+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Basque <LL@li.org>\n"
@@ -18,13 +18,17 @@ msgstr ""
 msgid "Check this to enable the click-to-zoom effect on images."
 msgstr "Aukeratu hau irudietan click-to-zoom (handitzeko) efektua aktibatzeko."
 
-#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:32
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:42
 msgid "Click To Zoom Control Panel"
 msgstr "Click To Zoom kontrol panela"
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:14
 msgid "Enable Click to Zoom"
 msgstr "Aktibatu Click to Zoom"
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:30
+msgid "If enabled, the zoom effect will show the original image instead of the selected scale."
+msgstr "Gaituz gero, zoom efektuak jatorrizko irudia erakutsiko du aukeratutako eskalaren ordez."
 
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:21
 msgid "Image scale"
@@ -37,6 +41,10 @@ msgstr "collective.click_to_zoom gune berria konfiguratzeko paketea"
 #: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:22
 msgid "Select the image scale that will be loaded when zooming."
 msgstr "Hautatu zooma egitean kargatuko den irudi-eskala (tamaina)."
+
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:29
+msgid "Show original image"
+msgstr "Jatorrizko irudia erakutsi"
 
 #: collective/click_to_zoom/profiles.zcml:21
 msgid "Uninstall collective.click_to_zoom setup."

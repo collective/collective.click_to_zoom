@@ -5,14 +5,8 @@ description = "An add-on for Plone to make images inserted through the TinyMCE e
 readme = "README.md"
 license = "GPL-2.0-only"
 requires-python = ">=3.10"
-authors = [
-    { name = "CodeSyntax", email = "plone@codesyntax.com" },
-]
-keywords = [
-    "CMS",
-    "Plone",
-    "Python",
-]
+authors = [{ name = "CodeSyntax", email = "plone@codesyntax.com" }]
+keywords = ["CMS", "Plone", "Python"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Web Environment",
@@ -30,16 +24,16 @@ classifiers = [
 ]
 dependencies = [
     "Products.CMFPlone",
+    "beautifulsoup4",
     "plone.api",
-    
     "z3c.jbot",
 ]
 
 [project.optional-dependencies]
 test = [
-    "horse-with-no-namespace",
     "plone.app.testing",
-    "plone.classicui","plone.restapi[test]",
+    "plone.classicui",
+    "plone.restapi[test]",
     "pytest",
     "pytest-cov",
     "pytest-plone>=1.0.0a2",
@@ -67,16 +61,14 @@ managed = false
 path = "src/collective/click_to_zoom/__init__.py"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
 strict-naming = true
 
 [tool.hatch.build.targets.sdist]
-exclude = [
-  "/.github",
-]
+exclude = ["/.github"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/collective"]
@@ -142,7 +134,8 @@ lint.select = [
     # mccabe
     "C90",
     # pycodestyle
-    "E", "W",
+    "E",
+    "W",
     # pyflakes
     "F",
     # pygrep-hooks
@@ -179,9 +172,19 @@ testpaths = ["tests"]
 source_pkgs = ["collective.click_to_zoom", "tests"]
 branch = true
 parallel = true
-omit = [
-  "src/collective/click_to_zoom/locales/*.py",
-]
+omit = ["src/collective/click_to_zoom/locales/*.py"]
 
 [tool.zest-releaser]
 python-file-with-version = "src/collective/click_to_zoom/__init__.py"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+text = "\n\n---\n\n"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "CHANGELOG.md"

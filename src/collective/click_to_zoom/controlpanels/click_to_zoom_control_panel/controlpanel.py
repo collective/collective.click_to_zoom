@@ -25,6 +25,16 @@ class IClickToZoomControlPanel(Interface):
         required=True,
     )
 
+    show_original = schema.Bool(
+        title=_("Show original image"),
+        description=_(
+            "If enabled, the zoom effect will show the original "
+            "image instead of the selected scale."
+        ),
+        default=False,
+        required=False,
+    )
+
 
 class ClickToZoomControlPanel(RegistryEditForm):
     schema = IClickToZoomControlPanel
