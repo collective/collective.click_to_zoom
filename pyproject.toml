@@ -22,7 +22,12 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
-dependencies = ["Products.CMFPlone", "plone.api", "z3c.jbot"]
+dependencies = [
+    "Products.CMFPlone",
+    "plone.api",
+    "plone.rfc822",
+    "z3c.jbot",
+]
 
 [project.optional-dependencies]
 test = [

@@ -68,5 +68,5 @@ class TestOutputFilter:
 
         assert 'href="http://nohost/plone/test-image-original/@@images/image"' in result
         assert 'class="click-to-zoom"' not in result
-        assert 'data-width' not in result
-        assert 'data-height' not in result
+        assert "data-width" not in result
+        assert "data-height" not in result
