@@ -67,8 +67,8 @@ class ClickToZoomFilter:
             info = IPrimaryFieldInfo(item, None)
             if info:
                 field_name = info.fieldname
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Failed to obtain primary field info: %s", str(e))
 
         if show_original:
             return f"{item.absolute_url()}/@@images/{field_name}"
@@ -106,8 +106,8 @@ class ClickToZoomFilter:
                 width, height = self._get_dimensions_from_value(info.value)
                 if width:
                     return width, height
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Failed to obtain primary field dimensions: %s", str(e))
 
         # Fallback to 'image' attribute
         try:
@@ -117,8 +117,8 @@ class ClickToZoomFilter:
                 return width, height
             if hasattr(field_value, "getWidth"):
                 return field_value.getWidth(), field_value.getHeight()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Failed to obtain 'image' attribute dimensions: %s", str(e))
 
         # Final fallback: use the 'images' view to get original scale dimensions
         try:
@@ -127,8 +127,8 @@ class ClickToZoomFilter:
                 scale = images_view.scale("image")
                 if scale:
                     return scale.width, scale.height
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Failed to obtain dimensions via images view: %s", str(e))
 
         return None, None
 
