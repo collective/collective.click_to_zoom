@@ -25,6 +25,13 @@ Key features:
 - **Configurable:** Includes a Plone Control Panel where administrators can:
   - Toggle the click-to-zoom effect globally (Enable/Disable).
   - Select the specific image scale to be used when zooming (e.g., `large`, `great`, `huge`), dynamically populated from Plone's existing image scales vocabulary.
+  - **Show original image:** Option to show the original image directly when zooming, bypassing the selected scale.
+- **Interactive Zoom & Pan:** The lightbox supports advanced interactions:
+  - **Click-to-Zoom:** Toggle between "Fit to Screen" and zoomed view.
+  - **Smooth Wheel Zoom:** Use the mouse wheel to zoom in and out at the cursor position.
+  - **Drag-to-Pan:** Click and drag to explore every detail of the image when zoomed in.
+  - **Resolution Aware:** Automatically limits the maximum zoom level to the image's original resolution to prevent pixelation. If an image is smaller than the screen, zooming is automatically disabled.
+  - **Mobile Friendly:** Supports touch gestures via modern Pointer Events.
 - **ZCA compliant:** The backend HTML parser is conditionally applied through an `IBrowserLayer`, ensuring zero overhead on sites where the add-on is not installed.
 - **Graceful degradation:** If an image is already manually wrapped in a hyperlink (e.g., the editor linked the image to a different page), the zoom filter will safely ignore it to preserve the author's intent.
 

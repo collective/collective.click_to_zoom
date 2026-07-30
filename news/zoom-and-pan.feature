@@ -1,0 +1,4 @@
+- Added interactive pan and zoom to the lightbox.
+- Added "Show original image" option to the control panel.
+- Added automatic zoom limit based on the original image resolution.
+- Added upgrade step to update the registry for existing installations.
