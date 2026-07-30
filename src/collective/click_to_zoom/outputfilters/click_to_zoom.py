@@ -61,12 +61,7 @@ class ClickToZoomFilter:
             True,
         )
 
-    def _get_zoom_url(self, item, registry):
-        show_original = registry.get(
-            "collective.click_to_zoom.click_to_zoom_control_panel.show_original",
-            False,
-        )
-
+    def _get_zoom_url(self, item, registry, show_original=False):
         field_name = "image"
         info = IPrimaryFieldInfo(item, None)
         if info:
@@ -150,18 +145,23 @@ class ClickToZoomFilter:
         if item is None:
             return False
 
-        zoom_url = self._get_zoom_url(item, registry)
+        show_original = registry.get(
+            "collective.click_to_zoom.click_to_zoom_control_panel.show_original",
+            False,
+        )
+        zoom_url = self._get_zoom_url(item, registry, show_original=show_original)
 
         # Create a new <a> tag and wrap the image
         a_tag = soup.new_tag("a", href=zoom_url)
-        a_tag["class"] = "click-to-zoom"
-        a_tag["data-linktype"] = "image-zoom"
+        if not show_original:
+            a_tag["class"] = "click-to-zoom"
+            a_tag["data-linktype"] = "image-zoom"
 
-        # Get original dimensions
-        width, height = self._get_dimensions(item)
-        if width:
-            a_tag["data-width"] = str(width)
-            a_tag["data-height"] = str(height)
+            # Get original dimensions
+            width, height = self._get_dimensions(item)
+            if width:
+                a_tag["data-width"] = str(width)
+                a_tag["data-height"] = str(height)
 
         img.wrap(a_tag)
         return True

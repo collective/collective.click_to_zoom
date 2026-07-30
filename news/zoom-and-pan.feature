@@ -1,4 +1,4 @@
 - Added interactive pan and zoom to the lightbox.
-- Added "Show original image" option to the control panel.
+- Added "Show original image" option to the control panel. When enabled, the lightbox is bypassed and the browser handles the image link directly.
 - Added automatic zoom limit based on the original image resolution.
 - Added upgrade step to update the registry for existing installations.

@@ -67,6 +67,6 @@ class TestOutputFilter:
         result = filter_(html)
 
         assert 'href="http://nohost/plone/test-image-original/@@images/image"' in result
-        assert 'class="click-to-zoom"' in result
-        assert 'data-width="1"' in result
-        assert 'data-height="1"' in result
+        assert 'class="click-to-zoom"' not in result
+        assert 'data-width' not in result
+        assert 'data-height' not in result
