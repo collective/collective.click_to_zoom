@@ -77,22 +77,32 @@ class ClickToZoomFilter:
             return False
 
         zoom_url = None
-        # Get the selected image scale from the control panel registry
-        scale_name = registry.get(
-            "collective.click_to_zoom.click_to_zoom_control_panel.image_scale",
-            "large",
+
+        # Check if we should use the original image
+        show_original = registry.get(
+            "collective.click_to_zoom.click_to_zoom_control_panel.show_original",
+            False,
         )
 
-        # Get the cacheable URL for the chosen scale
-        try:
-            images_view = api.content.get_view("images", item, self.request)
-            if images_view:
-                # The most common field name for an image is 'image'
-                scale = images_view.scale("image", scale=scale_name)
-                if scale:
-                    zoom_url = scale.url
-        except Exception as e:
-            logger.debug("Failed to obtain scale for click-to-zoom: %s", str(e))
+        if show_original:
+            zoom_url = f"{item.absolute_url()}/@@images/image"
+        else:
+            # Get the selected image scale from the control panel registry
+            scale_name = registry.get(
+                "collective.click_to_zoom.click_to_zoom_control_panel.image_scale",
+                "large",
+            )
+
+            # Get the cacheable URL for the chosen scale
+            try:
+                images_view = api.content.get_view("images", item, self.request)
+                if images_view:
+                    # The most common field name for an image is 'image'
+                    scale = images_view.scale("image", scale=scale_name)
+                    if scale:
+                        zoom_url = scale.url
+            except Exception as e:
+                logger.debug("Failed to obtain scale for click-to-zoom: %s", str(e))
 
         # If no scale is obtained, use the original image URL as fallback
         if not zoom_url:

@@ -10,6 +10,7 @@
   >
     <value key="enabled">True</value>
     <value key="image_scale">large</value>
+    <value key="show_original">False</value>
   </records>
 
 
