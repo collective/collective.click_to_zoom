@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-07-30 13:45+0000\n"
+"POT-Creation-Date: 2026-07-30 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Check this to enable the click-to-zoom effect on images."
 msgstr ""
 
-#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:41
+#: collective/click_to_zoom/controlpanels/click_to_zoom_control_panel/controlpanel.py:42
 msgid "Click To Zoom Control Panel"
 msgstr ""
 
