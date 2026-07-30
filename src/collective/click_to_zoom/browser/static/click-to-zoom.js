@@ -27,6 +27,22 @@ document.addEventListener("DOMContentLoaded", function() {
     lightbox.appendChild(closeBtn);
     document.body.appendChild(lightbox);
 
+    function applyBoundaries(x, y, s) {
+        var vW = lightbox.offsetWidth;
+        var vH = lightbox.offsetHeight;
+        var imgW = img.offsetWidth * s;
+        var imgH = img.offsetHeight * s;
+
+        // Limit panning so at least 1/4 of the image is always visible
+        var limitX = vW / 2 + imgW / 4;
+        var limitY = vH / 2 + imgH / 4;
+
+        if (Math.abs(x) > limitX) x = (x > 0 ? 1 : -1) * limitX;
+        if (Math.abs(y) > limitY) y = (y > 0 ? 1 : -1) * limitY;
+
+        return { x: x, y: y };
+    }
+
     function updateTransform() {
         img.style.transform = 'translate(' + pointX + 'px, ' + pointY + 'px) scale(' + scale + ')';
     }
@@ -39,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
         lightbox.classList.remove('zoomed');
         lightbox.classList.remove('active');
         lightbox.classList.remove('not-zoomable');
+        document.body.style.overflow = '';
         setTimeout(function() {
             if (!lightbox.classList.contains('active')) {
                 lightbox.style.display = 'none';
@@ -103,25 +120,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Zoom on wheel
     lightbox.addEventListener('wheel', function(e) {
+        e.preventDefault();
         if (maxScale <= 1) return;
         
-        e.preventDefault();
         var delta = -e.deltaY;
         var factor = 0.2;
         var newScale = scale + (delta > 0 ? factor : -factor);
 
-        if (newScale >= 1 && newScale <= maxScale) {
+        // Clamp scale
+        if (newScale > maxScale) newScale = maxScale;
+        if (newScale < 1) newScale = 1;
+
+        if (newScale !== scale) {
             // Zoom towards cursor
             var rect = img.getBoundingClientRect();
             var x = e.clientX - rect.left;
             var y = e.clientY - rect.top;
             
-            pointX -= (x - rect.width / 2) * (newScale / scale - 1);
-            pointY -= (y - rect.height / 2) * (newScale / scale - 1);
+            var newPointX = pointX - (x - rect.width / 2) * (newScale / scale - 1);
+            var newPointY = pointY - (y - rect.height / 2) * (newScale / scale - 1);
             
             scale = newScale;
             if (scale > 1.01) {
                 lightbox.classList.add('zoomed');
+                // Apply boundaries
+                var bounded = applyBoundaries(newPointX, newPointY, scale);
+                pointX = bounded.x;
+                pointY = bounded.y;
             } else {
                 scale = 1;
                 lightbox.classList.remove('zoomed');
@@ -147,6 +172,11 @@ document.addEventListener("DOMContentLoaded", function() {
         
         var newPointX = e.clientX - startX;
         var newPointY = e.clientY - startY;
+
+        // Constraints: prevent dragging the image completely out of view
+        var bounded = applyBoundaries(newPointX, newPointY, scale);
+        newPointX = bounded.x;
+        newPointY = bounded.y;
 
         // Determine if we've moved enough to call it a drag
         if (Math.abs(newPointX - pointX) > 2 || Math.abs(newPointY - pointY) > 2) {
@@ -184,6 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 pointY = 0;
                 updateTransform();
                 lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
                 
                 // We need to wait for the image to be potentially loaded or at least have dimensions
                 if (img.complete) {
