@@ -82,6 +82,7 @@ class ClickToZoomFilter:
             request = self.request
             if request is None:
                 from zope.globalrequest import getRequest
+
                 request = getRequest()
             images_view = api.content.get_view("images", item, request)
             if images_view:
@@ -102,18 +103,16 @@ class ClickToZoomFilter:
             return value.width, value.height
         return None, None
 
-    def _get_dimensions(self, item):
-        # Try primary field first
+    def _get_dimensions_from_primary_field(self, item):
         try:
             info = IPrimaryFieldInfo(item, None)
             if info:
-                width, height = self._get_dimensions_from_value(info.value)
-                if width:
-                    return width, height
+                return self._get_dimensions_from_value(info.value)
         except Exception as e:
             logger.debug("Failed to obtain primary field dimensions: %s", str(e))
+        return None, None
 
-        # Fallback to 'image' attribute
+    def _get_dimensions_from_image_attribute(self, item):
         try:
             field_value = getattr(item, "image", None)
             width, height = self._get_dimensions_from_value(field_value)
@@ -123,12 +122,14 @@ class ClickToZoomFilter:
                 return field_value.getWidth(), field_value.getHeight()
         except Exception as e:
             logger.debug("Failed to obtain 'image' attribute dimensions: %s", str(e))
+        return None, None
 
-        # Final fallback: use the 'images' view to get original scale dimensions
+    def _get_dimensions_from_images_view(self, item):
         try:
             request = self.request
             if request is None:
                 from zope.globalrequest import getRequest
+
                 request = getRequest()
             images_view = api.content.get_view("images", item, request)
             if images_view:
@@ -137,8 +138,21 @@ class ClickToZoomFilter:
                     return scale.width, scale.height
         except Exception as e:
             logger.debug("Failed to obtain dimensions via images view: %s", str(e))
-
         return None, None
+
+    def _get_dimensions(self, item):
+        # Try primary field first
+        width, height = self._get_dimensions_from_primary_field(item)
+        if width:
+            return width, height
+
+        # Fallback to 'image' attribute
+        width, height = self._get_dimensions_from_image_attribute(item)
+        if width:
+            return width, height
+
+        # Final fallback: use the 'images' view to get original scale dimensions
+        return self._get_dimensions_from_images_view(item)
 
     def _process_image(self, img, soup, registry):
         # If the image is already inside a link, we don't do anything
