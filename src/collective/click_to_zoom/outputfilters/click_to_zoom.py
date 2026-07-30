@@ -67,8 +67,13 @@ class ClickToZoomFilter:
             False,
         )
 
+        field_name = "image"
+        info = IPrimaryFieldInfo(item, None)
+        if info:
+            field_name = info.fieldname
+
         if show_original:
-            return f"{item.absolute_url()}/@@images/image"
+            return f"{item.absolute_url()}/@@images/{field_name}"
 
         scale_name = registry.get(
             "collective.click_to_zoom.click_to_zoom_control_panel.image_scale",
@@ -78,13 +83,56 @@ class ClickToZoomFilter:
         try:
             images_view = api.content.get_view("images", item, self.request)
             if images_view:
-                scale = images_view.scale("image", scale=scale_name)
+                scale = images_view.scale(field_name, scale=scale_name)
                 if scale:
                     return scale.url
         except Exception as e:
             logger.debug("Failed to obtain scale for click-to-zoom: %s", str(e))
 
         return item.absolute_url()
+
+    def _get_dimensions_from_value(self, value):
+        if not value:
+            return None, None
+        if hasattr(value, "getImageSize"):
+            return value.getImageSize()
+        if hasattr(value, "width") and hasattr(value, "height"):
+            return value.width, value.height
+        return None, None
+
+    def _get_dimensions(self, item):
+        # Try primary field first
+        try:
+            info = IPrimaryFieldInfo(item, None)
+            if info:
+                width, height = self._get_dimensions_from_value(info.value)
+                if width:
+                    return width, height
+        except Exception:
+            logger.debug("Failed to obtain primary field dimensions")
+
+        # Fallback to 'image' attribute
+        try:
+            field_value = getattr(item, "image", None)
+            width, height = self._get_dimensions_from_value(field_value)
+            if width:
+                return width, height
+            if hasattr(field_value, "getWidth"):
+                return field_value.getWidth(), field_value.getHeight()
+        except Exception:
+            logger.debug("Failed to obtain 'image' attribute dimensions")
+
+        # Final fallback: use the 'images' view to get original scale dimensions
+        try:
+            images_view = api.content.get_view("images", item, self.request)
+            if images_view:
+                scale = images_view.scale("image")
+                if scale:
+                    return scale.width, scale.height
+        except Exception:
+            logger.debug("Failed to obtain dimensions via images view")
+
+        return None, None
 
     def _process_image(self, img, soup, registry):
         # If the image is already inside a link, we don't do anything
@@ -110,19 +158,10 @@ class ClickToZoomFilter:
         a_tag["data-linktype"] = "image-zoom"
 
         # Get original dimensions
-        try:
-            info = IPrimaryFieldInfo(item, None)
-            if info:
-                field_value = info.value
-                if field_value and hasattr(field_value, "getImageSize"):
-                    width, height = field_value.getImageSize()
-                    a_tag["data-width"] = width
-                    a_tag["data-height"] = height
-                elif field_value and hasattr(field_value, "width"):
-                    a_tag["data-width"] = field_value.width
-                    a_tag["data-height"] = field_value.height
-        except Exception:
-            logger.debug("Failed to obtain dimensions for click-to-zoom")
+        width, height = self._get_dimensions(item)
+        if width:
+            a_tag["data-width"] = str(width)
+            a_tag["data-height"] = str(height)
 
         img.wrap(a_tag)
         return True
